@@ -35,6 +35,10 @@ public class Test {
 
         Test.findIpsInRange(new File("src/main/resources/second.txt"), ranges);
         Test.findIpsInRange(new File("src/main/resources/third.txt"), ranges);
+        System.out.println("Start processing 500k ips.");
+        long start = System.currentTimeMillis();
+        Test.findIpsInRange(new File("src/main/resources/testSampleFileWith500000ips.txt"), ranges);
+        System.out.println("Finished. Time: " + (start - System.currentTimeMillis()) + " mc");
         System.out.println(foundIpsCounter + " ips found in Blacklist");
 
     }
