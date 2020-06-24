@@ -38,8 +38,8 @@ public class Test {
         System.out.println("Start processing 500k ips.");
         long start = System.currentTimeMillis();
         Test.findIpsInRange(new File("src/main/resources/testSampleFileWith500000ips.txt"), ranges);
-        System.out.println("Finished. Time: " + (start - System.currentTimeMillis()) + " mc");
-        System.out.println(foundIpsCounter + " ips found in Blacklist");
+        System.out.println("Finished. Time: " + (System.currentTimeMillis() - start) + " mc");
+        System.out.println(foundIpsCounter + " ips found in the Blacklist");
 
     }
 
@@ -50,7 +50,7 @@ public class Test {
             final int ip = ipToInteger(playerIp);
             Optional<Range<Integer>> any = ranges.stream().filter((range) -> range.contains(ip)).findAny();
             if (any.isPresent()) {
-                System.out.println("IP: " + playerIp + " is found in blacklist");
+                System.out.println("IP: " + playerIp + " was found in the blacklist");
                 foundIpsCounter++;
             }
         }
@@ -59,13 +59,10 @@ public class Test {
     public static int ipToInteger(String ipAddress) {
 
         int result = 0;
-
         String[] ipAddressInArray = ipAddress.split("\\.");
 
         for (int i = 3; i >= 0; i--) {
-
             int ip = Integer.parseInt(ipAddressInArray[3 - i]);
-
             //left shifting 24,16,8,0 and bitwise OR
 
             //1. 192 << 24
@@ -73,7 +70,6 @@ public class Test {
             //1. 1   << 8
             //1. 2   << 0
             result |= ip << (i * 8);
-
         }
 
         return result;
